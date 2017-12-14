@@ -71,6 +71,7 @@ div p {
 h2 {
    font-size: 1.5em;
    text-transform: uppercase;
+   margin-bottom: 10px;
 }
 
 </style>
