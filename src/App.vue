@@ -1,15 +1,9 @@
 <template>
 
   <div>
-
-  <div id="header">
-   <img src="/src/assets/favicon.png" height="55px" width="55px">
-   <h2>KRYPTO-WATCHER</h2>
-  </div>
-
-
+  <intro></intro>
   <div id="body"> 
-  <h2> KRYPTO-WATCHER is a realtime PWA that displays updates on cryptocurrencies</h2>
+  <h2> </h2>
   <div id="current"> <current v-bind:currentCurrency="currentCurrency"> </current>  </div>
   <div id="previous"> <previous v-bind:previousCurrency="previousCurrency"> </previous>  </div>
   </div>
@@ -20,6 +14,7 @@
 
 <script>
 
+import Intro from './components/Intro.vue';
 import Current from './components/Current.vue';
 import Previous from './components/Previous.vue';
 import Pusher from 'pusher-js'
@@ -30,7 +25,8 @@ export default {
 
   components: {
     current: Current,
-    previous: Previous
+    previous: Previous,
+    intro:Intro
   },
 
   data () {
@@ -278,30 +274,51 @@ fiveDaysPrices: function() {
 
 </script>
 
-<style scoped>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+/* ==================== General Styles ========================== */
 
 * {
   margin : 0px;
   padding : 0px;
-  box-sizing: border-box;
+ /* box-sizing: border-box; */
+  font-family: 'Lato', sans-serif;
+  color: #ffffff;
+}
+h1,h2,h3,h3,h5,h6{
+
 }
 
-body, html {
-  height: 100%;
+body{
+  height: 100vh;
   width: 100%;
 }
-
-#header {
-  background: #4F4F4F;
-  padding: 1em;
-  margin-bottom: 1em;
-  text-align: center;
+.row{
+	display: flex;
+	flex-wrap: wrap;
 }
+h1{
+	font-size: 64px;
+}
+a{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a:hover{
+	color: #FFFFFF;
+}
+a:visited{
+	color: #000000;
+}
+.button{
+margin: auto;
+width: 200px;
+height: 60px;
+border: 2px solid #E36F55;
+box-sizing: border-box;
+border-radius: 30px;
 
-#header h2 {
-  color: white;
-  font-weight: bold;
-  font-size: 2rem;
 }
 
 #body {
