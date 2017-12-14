@@ -30,7 +30,7 @@ header {
   padding: 1em;
   margin-bottom: 1em;
   text-align: center;
-  height: 400px;
+  height: 300px;
 }
 
 header h3 {
@@ -64,14 +64,14 @@ bar{
 	font-weight: bold;
 	line-height: 50px;
 	font-size: 14px;
-	}
+}
 header h1{
-	padding-top: 120px;
+	padding-top: 80px;
 	width: 80%;
 	margin: auto;
 }
 header h2{
-	padding-top:20px;
+	padding-top:20px;	
 }
 
 

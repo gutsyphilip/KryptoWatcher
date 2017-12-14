@@ -64,12 +64,16 @@ export default {
 </script>
 
 <style scoped>
+*{
+  color:rgb(0, 193, 131);
+}
 
 #first, #second, #third, #fourth, #fifth {
-border: 1px solid #F5CE00;
+border: 1px solid rgb(0, 193, 131);
+box-shadow: 2px 2px 2px 2px #929292;
 padding: 2em 0em;
 max-width: 90%;
-margin: 3px auto;
+margin: 10px  auto;
 } 
 
 #first p, #second p, #third p, #fourth p, #fifth p {
@@ -79,7 +83,7 @@ margin: 3px auto;
 }
 
 h2 {
-
+  text-transform: uppercase;
    font-size: 1.5em;
 
 }

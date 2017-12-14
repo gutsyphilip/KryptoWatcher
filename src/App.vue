@@ -299,7 +299,7 @@ body{
 	flex-wrap: wrap;
 }
 h1{
-	font-size: 64px;
+	font-size: 48px;
 }
 a{
 	color: #FFFFFF;
@@ -325,13 +325,10 @@ border-radius: 30px;
   max-width: 90%;
   margin: 0 auto;
   padding: 1.5em;
-  background: #4F4F4F;
   text-align: center;
+  color:rgb(0, 193, 131);
 }
 
-#body h2{ 
-  color: white;
-}
 
 #current {
   padding: 2em 0em;

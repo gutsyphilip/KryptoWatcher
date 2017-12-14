@@ -33,9 +33,13 @@ export default {
 </script>
 
 <style scoped>
+*{
+  color:rgb(0, 193, 131);
+}
 
 #btc {
-border: 1px solid #F5CE00;
+  box-shadow: 2px 2px 2px 2px #929292;
+border: 1px solid rgb(0, 193, 131);
 border-radius: 15px;
 padding: 2em 0em;
 display: inline-block;
@@ -43,7 +47,8 @@ width: 30%;
 } 
 
 #eth {
-border: 1px solid #F5CE00;
+  box-shadow: 2px 2px 2px 2px #929292;
+border: 1px solid rgb(0, 193, 131);
 border-radius: 15px;
 padding: 2em 0em;
 display: inline-block;
@@ -51,7 +56,8 @@ width: 30%;
 }
 
 #ltc {
-border: 1px solid #F5CE00;
+  box-shadow: 2px 2px 2px 2px #929292;
+border: 1px solid rgb(0, 193, 131);
 border-radius: 15px;
 padding: 2em 0em;
 display: inline-block;
@@ -64,6 +70,7 @@ div p {
 
 h2 {
    font-size: 1.5em;
+   text-transform: uppercase;
 }
 
 </style>
