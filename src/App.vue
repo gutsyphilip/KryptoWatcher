@@ -39,50 +39,21 @@ export default {
       LTC : '',
       },
 
-      previousCurrency: {
-        yesterday: {},
-        twoDays: {},
-        threeDays: {},
-        fourDays: {},
-        fiveDays: {}
-      }
+      previousCurrency:[]
     }
   },
 
   methods: {
 
-  yesterdayPrices: function() {
-
-    var self = this;    
-    var date = this.$moment().subtract(1, 'days').unix();
-
-    this.axios.all([
-      
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD&ts=' + date),
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=USD&ts=' + date),
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=LTC&tsyms=USD&ts=' + date)
-
-    ]).then(this.axios.spread((BTC, ETH, LTC) => {
-
-                let temp  = {
-
-                    DATE: this.$moment.unix(date).format("MMMM Do YYYY"),
-                    BTC: BTC.data.BTC.USD,
-                    ETH: ETH.data.ETH.USD,
-                    LTC: LTC.data.LTC.USD
-                }
-
-                self.previousCurrency.yesterday = temp;
-                localStorage.setItem('yesterdayPrices', JSON.stringify(temp));
-
-            }))
-
-  },
-
-  twoDaysPrices: function() {
-
+getCurrencyHistory: function(days) {
     var self = this;
-    var date = this.$moment().subtract(2, 'days').unix();    
+  
+    for ( var i=1; i>=days ; i++ ) {
+
+       
+       var date = this.$moment().subtract(i, 'days').unix(); 
+     
+   
 
     this.axios.all([
       
@@ -92,102 +63,21 @@ export default {
 
     ]).then(this.axios.spread((BTC, ETH, LTC) => {
 
-                let temp  = {
-
+                let temp  = [... self.previousCurrency,
+                {
                     DATE: this.$moment.unix(date).format("MMMM Do YYYY"),
                     BTC: BTC.data.BTC.USD,
                     ETH: ETH.data.ETH.USD,
                     LTC: LTC.data.LTC.USD
-                }
+                }]
 
-                self.previousCurrency.twoDays = temp;
-                localStorage.setItem('twoDaysPrices', JSON.stringify(temp));
+                self.previousCurrency = temp;
+                localStorage.setItem(this.$moment.unix(date).format("MMMM Do YYYY"), JSON.stringify(temp));
 
             }))
-
-  },
-
-  threeDaysPrices: function() {
-
-    var self = this;
-    var date = this.$moment().subtract(3, 'days').unix();    
-
-    this.axios.all([
       
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD&ts=' + date),
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=USD&ts=' + date),
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=LTC&tsyms=USD&ts=' + date)
-
-    ]).then(this.axios.spread((BTC, ETH, LTC) => {
-
-                let temp  = {
-
-                    DATE: this.$moment.unix(date).format("MMMM Do YYYY"),
-                    BTC: BTC.data.BTC.USD,
-                    ETH: ETH.data.ETH.USD,
-                    LTC: LTC.data.LTC.USD
-                }
-
-                self.previousCurrency.threeDays = temp;
-                localStorage.setItem('threeDaysPrices', JSON.stringify(temp));
-
-            }))
-
-  },
-
-  fourDaysPrices: function(date) {
-
-    var self = this;
-    var date = this.$moment().subtract(4, 'days').unix();        
-
-    this.axios.all([
-      
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD&ts=' + date),
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=USD&ts=' + date),
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=LTC&tsyms=USD&ts=' + date)
-
-    ]).then(this.axios.spread((BTC, ETH, LTC) => {
-
-                let temp  = {
-
-                    DATE: this.$moment.unix(date).format("MMMM Do YYYY"),
-                    BTC: BTC.data.BTC.USD,
-                    ETH: ETH.data.ETH.USD,
-                    LTC: LTC.data.LTC.USD
-                }
-
-                self.previousCurrency.fourDays = temp;
-                localStorage.setItem('fourDaysPrices', JSON.stringify(temp));
-
-            }))
-
-  },
-
-fiveDaysPrices: function() {
-
-    var self = this;
-    var date = this.$moment().subtract(5, 'days').unix(); 
-
-    this.axios.all([
-      
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD&ts=' + date),
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=USD&ts=' + date),
-       this.axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=LTC&tsyms=USD&ts=' + date)
-
-    ]).then(this.axios.spread((BTC, ETH, LTC) => {
-
-                let temp  = {
-
-                    DATE: this.$moment.unix(date).format("MMMM Do YYYY"),
-                    BTC: BTC.data.BTC.USD,
-                    ETH: ETH.data.ETH.USD,
-                    LTC: LTC.data.LTC.USD
-                }
-
-                self.previousCurrency.fiveDays = temp;
-                localStorage.setItem('fiveDaysPrices', JSON.stringify(temp));
-
-            }))
+  }
+  console.log(self.previousCurrency);
 
   },
 
@@ -213,12 +103,14 @@ fiveDaysPrices: function() {
         this.currentCurrency.BTC = localStorage.getItem('BTC');
         this.currentCurrency.ETH = localStorage.getItem('ETH');
         this.currentCurrency.LTC = localStorage.getItem('LTC');
+        
+        for (var i=1; i<=30;i++){
+        var date = this.$moment().subtract(30, 'days').unix(); 
+        offlineData = [...this.previousCurrency,
+         JSON.parse(localStorage.getItem(this.$moment.unix(date).format("MMMM Do YYYY")))]
+        }
 
-        this.previousCurrency.yesterday = JSON.parse(localStorage.getItem('yesterdayPrices'))
-        this.previousCurrency.twoDays = JSON.parse(localStorage.getItem('twoDaysPrices'))
-        this.previousCurrency.threeDays = JSON.parse(localStorage.getItem('threeDaysPrices'))
-        this.previousCurrency.fourDays = JSON.parse(localStorage.getItem('fourDaysPrices'))
-        this.previousCurrency.fiveDays = JSON.parse(localStorage.getItem('fiveDaysPrices'))
+        
     }
 
     this.pusher = new Pusher('92328e0f11b44cfe765f', {
@@ -228,11 +120,7 @@ fiveDaysPrices: function() {
 
    this.prices = this.pusher.subscribe('price-updates');
 
-    this.yesterdayPrices()
-    this.twoDaysPrices()
-    this.threeDaysPrices()
-    this.fourDaysPrices()
-    this.fiveDaysPrices()
+    this.getCurrencyHistory(30);
 
     this.axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC&tsyms=USD').then((response) => {
 

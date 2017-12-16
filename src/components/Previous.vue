@@ -3,42 +3,12 @@
   <div>
 
 <h2>Previous prices of coins</h2>
-<div id="first">
-<h2>Date: &nbsp; {{previousCurrency.yesterday.DATE}}</h2>
-<p><label>1 BTC:&nbsp;</label>{{previousCurrency.yesterday.BTC}}</p>
-<p><label>1 ETH:&nbsp;</label>{{previousCurrency.yesterday.ETH}}</p>
-<p><label>1 LTC:&nbsp;</label>{{previousCurrency.yesterday.LTC}}</p>
+<div id="first" v-for="day in previousCurrency">
+<h2>Date: &nbsp; {{day.DATE}}</h2>
+<p><label>1 BTC:&nbsp;</label>{{day.BTC}}</p>
+<p><label>1 ETH:&nbsp;</label>{{day.ETH}}</p>
+<p><label>1 LTC:&nbsp;</label>{{day.LTC}}</p>
 </div>
-
-<div id="second">
-<h2>Date: &nbsp; {{previousCurrency.twoDays.DATE}}</h2>
-<p><label>1 BTC:&nbsp;</label>{{previousCurrency.twoDays.BTC}}</p>
-<p><label>1 ETH:&nbsp;</label>{{previousCurrency.twoDays.ETH}}</p>
-<p><label>1 LTC:&nbsp;</label>{{previousCurrency.twoDays.LTC}}</p>
-</div>
-
-<div id="third">
-<h2>Date: &nbsp; {{previousCurrency.threeDays.DATE}}</h2>
-<p><label>1 BTC:&nbsp;</label>{{previousCurrency.threeDays.BTC}}</p>
-<p><label>1 ETH:&nbsp;</label>{{previousCurrency.threeDays.ETH}}</p>
-<p><label>1 LTC:&nbsp;</label>{{previousCurrency.threeDays.LTC}}</p>
-</div>
-
-<div id="fourth">
-<h2>Date: &nbsp; {{previousCurrency.fourDays.DATE}}</h2>
-<p><label>1 BTC:&nbsp;</label>{{previousCurrency.fourDays.BTC}}</p>
-<p><label>1 ETH:&nbsp;</label>{{previousCurrency.fourDays.ETH}}</p>
-<p><label>1 LTC:&nbsp;</label>{{previousCurrency.fourDays.LTC}}</p>
-</div>
-
-<div id="fifth">
-<h2>Date: &nbsp; {{previousCurrency.fiveDays.DATE}}</h2>
-<p><label>1 BTC:&nbsp;</label>{{previousCurrency.fiveDays.BTC}}</p>
-<p><label>1 ETH:&nbsp;</label>{{previousCurrency.fiveDays.ETH}}</p>
-<p><label>1 LTC:&nbsp;</label>{{previousCurrency.fiveDays.LTC}}</p>
-</div>
-
-
  </div>
 
 </template>
@@ -50,7 +20,7 @@ export default {
 
     props: {
     previousCurrency: {
-      type: Object
+      type: Array
     }
  }, 
 
